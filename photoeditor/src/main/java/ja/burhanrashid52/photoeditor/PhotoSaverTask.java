@@ -158,6 +158,9 @@ class PhotoSaverTask extends AsyncTask<String, String, PhotoSaverTask.SaveResult
                 Bitmap.Config.ARGB_8888
         );
         Canvas canvas = new Canvas(bitmap);
+        while (view.isDirty()) {
+            // do nothing;
+        }
         view.draw(canvas);
         return bitmap;
     }
