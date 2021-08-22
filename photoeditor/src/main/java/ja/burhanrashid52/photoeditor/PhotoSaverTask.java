@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -158,9 +160,12 @@ class PhotoSaverTask extends AsyncTask<String, String, PhotoSaverTask.SaveResult
                 Bitmap.Config.ARGB_8888
         );
         Canvas canvas = new Canvas(bitmap);
+
         while (view.isDirty()) {
-            // do nothing;
+            // Busy-wait (while View is Dirty and can't be drawn)
+            new Handler(Looper.getMainLooper()).postDelayed(() -> { }, 100);
         }
+
         view.draw(canvas);
         return bitmap;
     }
