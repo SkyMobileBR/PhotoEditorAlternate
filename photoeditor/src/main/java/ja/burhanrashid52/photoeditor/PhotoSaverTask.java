@@ -164,9 +164,12 @@ class PhotoSaverTask extends AsyncTask<String, String, PhotoSaverTask.SaveResult
         while (view.isDirty()) {
             // Busy-wait (while View is Dirty and can't be drawn)
             new Handler(Looper.getMainLooper()).postDelayed(() -> { }, 100);
+            Log.d(TAG, "Generating final image...");
         }
 
+        Log.d(TAG, "Final image about to be drawn in canvas...");
         view.draw(canvas);
+        Log.d(TAG, "Final image drawn and ready for saving...");
         return bitmap;
     }
 
