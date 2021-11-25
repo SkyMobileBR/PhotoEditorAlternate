@@ -104,6 +104,10 @@ public class TextStyleBuilder {
         values.put(TextStyle.TEXT_STYLE,typeface);
     }
 
+    public void withTextPadding(int leftPad, int topPad, int rightPad, int bottomPad) {
+        values.put(TextStyle.TEXT_PADDING, new int[]{leftPad, topPad, rightPad, bottomPad});
+    }
+
     public void withTextFlag(int paintFlag){
         values.put(TextStyle.TEXT_FLAG,paintFlag);
     }
@@ -178,6 +182,10 @@ public class TextStyleBuilder {
                     applyTextFlag(textView,flag);
                 }
                 break;
+                case TEXT_PADDING: {
+                    int[] pads=(int[]) entry.getValue();
+                    applyTextPadding(textView, pads[0], pads[1], pads[2], pads[3]);
+                }
 
                 case SHADOW: {
                     if (entry.getValue() instanceof TextShadow){
@@ -255,6 +263,11 @@ public class TextStyleBuilder {
         textView.getPaint().setFlags(flag);
     }
 
+    // text padding
+    protected void applyTextPadding(TextView textView, int leftPad, int topPad, int rightPad, int bottomPad) {
+        textView.setPadding(leftPad, topPad, rightPad, bottomPad);
+    }
+
     protected void applyTextAppearance(TextView textView, int styleAppearance) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             textView.setTextAppearance(styleAppearance);
@@ -275,6 +288,7 @@ public class TextStyleBuilder {
         TEXT_APPEARANCE("TextAppearance"),
         TEXT_STYLE("TextStyle"),
         TEXT_FLAG("TextFlag"),
+        TEXT_PADDING("TextPadding"),
         SHADOW("Shadow"),
         BORDER("Border");
 
