@@ -1,9 +1,7 @@
 package ja.burhanrashid52.photoeditor
 
-import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
 import android.text.TextUtils
@@ -11,7 +9,10 @@ import android.util.Log
 import android.view.View
 import ja.burhanrashid52.photoeditor.BitmapUtil.removeTransparency
 import ja.burhanrashid52.photoeditor.PhotoEditor.OnSaveListener
-import ja.burhanrashid52.photoeditor.PhotoSaverTask.SaveResult
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -21,8 +22,7 @@ import java.io.IOException
  *
  * @author <https:></https:>//github.com/burhanrashid52>
  */
-internal class PhotoSaverTask(photoEditorView: PhotoEditorView, boxHelper: BoxHelper) :
-    AsyncTask<String?, String?, SaveResult>() {
+internal class PhotoSaverTask(photoEditorView: PhotoEditorView, boxHelper: BoxHelper) {
     private var mSaveSettings: SaveSettings
     private var mOnSaveListener: OnSaveListener? = null
     private var mOnSaveBitmap: OnSaveBitmap? = null
@@ -39,22 +39,6 @@ internal class PhotoSaverTask(photoEditorView: PhotoEditorView, boxHelper: BoxHe
 
     fun setSaveSettings(saveSettings: SaveSettings) {
         mSaveSettings = saveSettings
-    }
-
-    override fun onPreExecute() {
-        super.onPreExecute()
-        mBoxHelper.clearHelperBox()
-        mDrawingView.destroyDrawingCache()
-    }
-
-    @SuppressLint("MissingPermission")
-    override fun doInBackground(vararg inputs: String?): SaveResult {
-        // Create a media file name
-        return if (inputs.isEmpty()) {
-            saveImageAsBitmap()
-        } else {
-            saveImageInFile(inputs[0]!!)
-        }
     }
 
     private fun saveImageAsBitmap(): SaveResult {
@@ -94,15 +78,6 @@ internal class PhotoSaverTask(photoEditorView: PhotoEditorView, boxHelper: BoxHe
                 mPhotoEditorView
             )
         ) else captureView(mPhotoEditorView)
-    }
-
-    override fun onPostExecute(saveResult: SaveResult) {
-        super.onPostExecute(saveResult)
-        if (TextUtils.isEmpty(saveResult.mImagePath)) {
-            handleBitmapCallback(saveResult)
-        } else {
-            handleFileCallback(saveResult)
-        }
     }
 
     private fun handleFileCallback(saveResult: SaveResult) {
@@ -164,6 +139,35 @@ internal class PhotoSaverTask(photoEditorView: PhotoEditorView, boxHelper: BoxHe
 
     fun saveFile(imagePath: String?) {
         execute(imagePath)
+    }
+
+    fun execute(vararg inputs: String?) {
+        // PRE-EXECUTE
+        mBoxHelper.clearHelperBox()
+/*        mDrawingView.destroyDrawingCache()*/
+
+        // EXECUTE ON BACK
+        // Create a media file name
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val saveResult = if (inputs.isEmpty()) {
+                saveImageAsBitmap()
+            } else {
+                saveImageInFile(inputs[0]!!)
+            }
+
+            // POST-EXECUTE
+            if (TextUtils.isEmpty(saveResult.mImagePath)) {
+                withContext(Dispatchers.Main) {
+                    handleBitmapCallback(saveResult)
+                }
+            } else {
+                withContext(Dispatchers.Main) {
+                    handleFileCallback(saveResult)
+                }
+            }
+        }
+
     }
 
     internal class SaveResult(
