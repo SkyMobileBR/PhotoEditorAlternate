@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ander/Downloads/PROJETOS/Pessoal/Contribuicoes GitHub/PhotoEditorAlternate/photoeditor/src/main/res/drawable/ic_remove_view.xml" value="0.20729166666666668" />
+        <entry key="..\:/Users/ander/Downloads/PROJETOS/Pessoal/Contribuicoes GitHub/PhotoEditorAlternate/photoeditor/src/main/res/drawable/rounded_border_tv.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/ander/Downloads/PROJETOS/Pessoal/Contribuicoes GitHub/PhotoEditorAlternate/photoeditor/src/main/res/layout/view_photo_editor_image.xml" value="0.19114583333333332" />
+        <entry key="..\:/Users/ander/Downloads/PROJETOS/Pessoal/Contribuicoes GitHub/PhotoEditorAlternate/photoeditor/src/main/res/layout/view_photo_editor_text.xml" value="1.25" />
         <entry key="..\:/Users/ander/Downloads/PROJETOS/Pessoal/Contribuicoes GitHub/PhotoEditor_original/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2353846153846154" />
       </map>
     </option>

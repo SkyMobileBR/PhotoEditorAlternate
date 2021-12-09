@@ -1,13 +1,14 @@
 package ja.burhanrashid52.photoeditor;
 
 import android.graphics.Rect;
-import androidx.annotation.Nullable;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+
+import androidx.annotation.Nullable;
 
 /**
  * Created on 18/01/2017.

@@ -1,5 +1,29 @@
 package ja.burhanrashid52.photoeditor;
 
+import static android.media.effect.EffectFactory.EFFECT_AUTOFIX;
+import static android.media.effect.EffectFactory.EFFECT_BLACKWHITE;
+import static android.media.effect.EffectFactory.EFFECT_BRIGHTNESS;
+import static android.media.effect.EffectFactory.EFFECT_CONTRAST;
+import static android.media.effect.EffectFactory.EFFECT_CROSSPROCESS;
+import static android.media.effect.EffectFactory.EFFECT_DOCUMENTARY;
+import static android.media.effect.EffectFactory.EFFECT_DUOTONE;
+import static android.media.effect.EffectFactory.EFFECT_FILLLIGHT;
+import static android.media.effect.EffectFactory.EFFECT_FISHEYE;
+import static android.media.effect.EffectFactory.EFFECT_FLIP;
+import static android.media.effect.EffectFactory.EFFECT_GRAIN;
+import static android.media.effect.EffectFactory.EFFECT_GRAYSCALE;
+import static android.media.effect.EffectFactory.EFFECT_LOMOISH;
+import static android.media.effect.EffectFactory.EFFECT_NEGATIVE;
+import static android.media.effect.EffectFactory.EFFECT_POSTERIZE;
+import static android.media.effect.EffectFactory.EFFECT_ROTATE;
+import static android.media.effect.EffectFactory.EFFECT_SATURATE;
+import static android.media.effect.EffectFactory.EFFECT_SEPIA;
+import static android.media.effect.EffectFactory.EFFECT_SHARPEN;
+import static android.media.effect.EffectFactory.EFFECT_TEMPERATURE;
+import static android.media.effect.EffectFactory.EFFECT_TINT;
+import static android.media.effect.EffectFactory.EFFECT_VIGNETTE;
+import static ja.burhanrashid52.photoeditor.PhotoFilter.NONE;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -18,9 +42,6 @@ import java.util.Map;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
-
-import static android.media.effect.EffectFactory.*;
-import static ja.burhanrashid52.photoeditor.PhotoFilter.*;
 
 /**
  * <p>
