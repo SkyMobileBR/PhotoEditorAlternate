@@ -144,7 +144,6 @@ internal class PhotoSaverTask(photoEditorView: PhotoEditorView, boxHelper: BoxHe
     fun execute(vararg inputs: String?) {
         // PRE-EXECUTE
         mBoxHelper.clearHelperBox()
-/*        mDrawingView.destroyDrawingCache()*/
 
         // EXECUTE ON BACK
         // Create a media file name
