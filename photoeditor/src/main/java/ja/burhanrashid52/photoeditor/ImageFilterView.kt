@@ -131,7 +131,7 @@ internal class ImageFilterView : GLSurfaceView, GLSurfaceView.Renderer {
     }
 
     private fun initEffect() {
-        val effectFactory = mEffectContext!!.factory
+        val effectFactory = mEffectrequireContext().factory
         if (mEffect != null) {
             mEffect!!.release()
         }

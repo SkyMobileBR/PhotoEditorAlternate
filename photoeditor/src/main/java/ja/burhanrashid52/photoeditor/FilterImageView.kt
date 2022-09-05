@@ -20,13 +20,13 @@ import androidx.appcompat.widget.AppCompatImageView
 internal class FilterImageView : AppCompatImageView {
     private var mOnImageChangedListener: OnImageChangedListener? = null
 
-    constructor(context: Context?) : super(context!!)
+    constructor(context: Context?) : super(requireContext())
     constructor(context: Context?, attrs: AttributeSet?) : super(
-        context!!, attrs
+        requireContext(), attrs
     )
 
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
-        context!!, attrs, defStyleAttr
+        requireContext(), attrs, defStyleAttr
     )
 
     fun setOnImageChangedListener(onImageChangedListener: OnImageChangedListener?) {
